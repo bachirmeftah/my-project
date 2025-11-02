@@ -1,93 +1,318 @@
+/* ==== استيراد الخط ==== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ==== متغيرات الألوان (لتسهيل التعديل) ==== */
+:root {
+  --primary-bg: #1f242d; /* خلفية داكنة */
+  --secondary-bg: #2a2f3a; /* خلفية أغمق قليلًا */
+  --text-color: #f0f0f0; /* لون النص الأساسي */
+  --accent-color: #00e5ff; /* اللون التركواز/الأزرق الفاتح */
+}
+
 /* ==== GENERAL ==== */
-body {
-  font-family: "Poppins", sans-serif;
+* {
   margin: 0;
   padding: 0;
-  color: #333;
-  background: #f9fafc;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  list-style: none;
+  border: none;
+  outline: none;
+}
+
+html {
   scroll-behavior: smooth;
+  background: transparent;
+
+}
+
+body {
+  background: transparent; /* يجب أن يكون شفافاً */
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+/* ==== HEADER (NAVBAR) ==== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: rgba(31, 36, 45, 0.1); /* خلفية شفافة قليلاً */
+  backdrop-filter: blur(10px); /* تأثير ضبابي للخلفية */
+}
+
+.logo {
+  font-size: 24px;
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+.navbar a {
+  font-size: 18px;
+  color: var(--text-color);
+  margin-left: 35px;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar a.active { 
+  color: var(--accent-color);
 }
 
 /* ==== HERO SECTION ==== */
-.hero {
-  height: 100vh;
-  background: linear-gradient(135deg, #001f3f, #0074d9);
-  color: white;
+.hero-section {
+  min-height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
-  text-align: center;
+  align-items: center;
+  padding: 80px 10% 20px;
+  gap: 3rem;
+  position: relative; /* ضروري لـ z-index */
+  z-index: 1; /* للتأكد من أنه فوق الجزيئات */
 }
 
-.hero .content {
-  max-width: 700px;
-  padding: 20px;
+.hero-content {
+  max-width: 600px;
 }
 
-.hero h1 {
-  font-size: 2.5em;
-  margin-bottom: 10px;
+.hero-content .greeting {
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
-.hero p {
-  font-size: 1.2em;
-  line-height: 1.5;
-  margin-bottom: 25px;
+.hero-content h1 {
+  font-size: 3.5rem; /* 56px */
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 5px 0 10px;
 }
 
-.hero .links a {
+.hero-content .role {
+  font-size: 2rem; /* 32px */
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.role .highlight {
+  color: var(--accent-color);
+}
+
+.hero-content .description {
+  font-size: 1rem; /* 16px */
+  line-height: 1.6;
+  color: #c0c0c0; /* لون أفتح قليلاً */
+  margin-bottom: 30px;
+}
+
+/* ==== SOCIAL ICONS ==== */
+.social-icons a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 2px solid var(--accent-color);
+  border-radius: 50%;
+  color: var(--accent-color);
+  font-size: 20px;
+  margin-right: 15px;
+  transition: 0.3s ease;
+}
+
+.social-icons a:hover {
+  background: var(--accent-color);
+  color: var(--primary-bg);
+  box-shadow: 0 0 15px var(--accent-color);
+}
+
+/* ==== CV BUTTON ==== */
+.btn-download {
   display: inline-block;
-  margin: 8px;
-  padding: 10px 20px;
-  color: white;
-  border: 2px solid white;
-  border-radius: 25px;
-  text-decoration: none;
-  transition: 0.3s;
+  padding: 12px 28px;
+  background: var(--accent-color);
+  border-radius: 40px;
+  box-shadow: 0 0 10px var(--accent-color);
+  font-size: 16px;
+  color: var(--primary-bg);
+  font-weight: 600;
+  margin-top: 30px;
+  transition: 0.3s ease;
 }
 
-.hero .links a:hover {
-  background: white;
-  color: #001f3f;
+.btn-download:hover {
+  box-shadow: 0 0 25px var(--accent-color);
+  transform: scale(1.05);
 }
 
-/* ==== SKILLS SECTION ==== */
+/* ==== HERO IMAGE (الشكل السداسي) ==== */
+.hero-image {
+  width: 350px;
+  height: 350px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* هذا الفلتر سيطبق التوهج على الشكل السداسي المقصوص */
+  filter: drop-shadow(0 0 25px var(--accent-color));
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* قص الصورة على شكل سداسي */
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* ==== SKILLS SECTION (تنسيق داكن) ==== */
 .skills {
-  padding: 60px 20px;
+  padding: 80px 10%;
   text-align: center;
+  background: var(--secondary-bg); /* خلفية مختلفة للقسم */
+  position: relative; /* ضروري لـ z-index */
+  z-index: 1; /* للتأكد من أنه فوق الجزيئات */
 }
 
 .skills h2 {
-  color: #001f3f;
-  font-size: 2em;
-  margin-bottom: 30px;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.skills h2 span {
+  color: var(--accent-color);
 }
 
 .skill-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
 }
 
 .skill-list span {
-  background: #0074d9;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-weight: bold;
-  transition: 0.3s;
+  background: var(--primary-bg);
+  color: var(--text-color);
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: 500;
+  border: 1px solid var(--accent-color);
+  transition: 0.3s ease;
 }
 
 .skill-list span:hover {
-  background: #005fa3;
+  background: var(--accent-color);
+  color: var(--primary-bg);
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px var(--accent-color);
 }
 
-/* ==== FOOTER ==== */
+/* أقسام مؤقتة */
+.placeholder-section {
+  min-height: 60vh;
+  padding: 80px 10%;
+  text-align: center;
+  position: relative; /* ضروري لـ z-index */
+  z-index: 1; /* للتأكد من أنه فوق الجزيئات */
+}
+
+/* ==== FOOTER (تنسيق داكن) ==== */
 footer {
   text-align: center;
-  background: #001f3f;
-  color: white;
-  padding: 15px 0;
+  background: var(--secondary-bg);
+  color: #a0a0a0;
+  padding: 20px 0;
   font-size: 0.9em;
+  position: relative; /* ضروري لـ z-index */
+  z-index: 1; /* للتأكد من أنه فوق الجزيئات */
+}
+
+/* ==== إعدادات خلفية الجزيئات (Particles) ==== */
+#tsparticles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* يجب أن يكون -1 ليصبح خلف كل شيء */
+  background-color: #1f242d;
+}
+
+
+/* ==== Media Query for Mobile Responsiveness ==== */
+/* (يطبق هذا الكود فقط إذا كان عرض الشاشة 768px أو أقل) */
+
+@media (max-width: 768px) {
+
+    /* 1. إصلاح الهيدر والـ Navbar */
+    header {
+        padding: 20px 5%; /* تقليل الحشو الجانبي */
+    }
+    
+    .navbar {
+        /* إخفاء القائمة العادية على الموبايل */
+        /* (سنحتاج لاحقاً لإضافة "أيقونة هامبرغر" هنا، لكن هذا هو الحل المبدئي) */
+        display: none; 
+    }
+    
+    .logo {
+        font-size: 22px;
+    }
+    
+    /* 2. إصلاح قسم Hero (الرئيسي) */
+    .hero-section {
+        flex-direction: column; /* جعل العناصر تحت بعضها (عمودياً) */
+        padding: 100px 5% 20px; /* تعديل الحشو */
+        text-align: center; /* جعل النصوص في المنتصف */
+        gap: 2rem; /* تقليل الفجوة */
+    }
+    
+    .hero-content {
+        order: 2; /* جعل المحتوى يظهر ثانياً (بعد الصورة) */
+    }
+
+    .hero-image {
+        order: 1; /* جعل الصورة تظهر أولاً */
+        width: 280px;  /* تصغير حجم الصورة */
+        height: 280px; /* تصغير حجم الصورة */
+    }
+    
+    /* 3. تصغير أحجام الخطوط */
+    .hero-content h1 {
+        font-size: 2.8rem; /* تصغير حجم الخط */
+    }
+    
+    .hero-content .role {
+        font-size: 1.5rem; /* تصغير حجم الخط */
+    }
+
+    /* 4. توسيط الأزرار والأيقونات */
+    .social-icons {
+        justify-content: center;
+    }
+    
+    .btn-download {
+        margin-top: 25px;
+    }
+
+    /* 5. إصلاح قسم المهارات */
+    .skills {
+        padding: 60px 5%; /* تقليل الحشو */
+    }
+
+    .skills h2 {
+        font-size: 2rem;
+    }
+
+    .skill-list span {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
 }
