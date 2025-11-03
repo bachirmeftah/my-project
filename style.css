@@ -102,7 +102,24 @@ header {
 
 .role .highlight {
   color: var(--accent-color);
+  /* ## إضافة: لجعل مؤشر الكتابة يعمل بشكل صحيح */
+  position: relative; 
 }
+
+/* ## إضافة: تأثير مؤشر الكتابة الوامض */
+.role .highlight::after {
+    content: '|';
+    position: absolute;
+    right: -8px; /* يمكنك تعديل المكان */
+    color: var(--accent-color);
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
 
 .hero-content .description {
   font-size: 1rem; /* 16px */
@@ -152,7 +169,8 @@ header {
   transform: scale(1.05);
 }
 
-/* ==== HERO IMAGE (الشكل السداسي) ==== */
+/* ==== HERO IMAGE (الشكل الدائري) ==== */
+/* ==== HERO IMAGE (الشكل الدائري) ==== */
 .hero-image {
   width: 350px;
   height: 350px;
@@ -160,17 +178,35 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* هذا الفلتر سيطبق التوهج على الشكل السداسي المقصوص */
-  filter: drop-shadow(0 0 25px var(--accent-color));
+  /* هذا الفلتر سيطبق التوهج على الشكل الدائري */
+  /* تم إزالة drop-shadow من هنا لأننا سنستخدم box-shadow للأنيميشن */
+  
+  /* ## إضافة: الهالة التفاعلية (Glow Animation) */
+  box-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--accent-color); /* توهج مبدئي */
+  border-radius: 50%; /* للتأكد من أن الهالة تأخذ شكل الصورة */
+  animation: pulsating-glow 2s infinite alternate; /* أنيميشن نبضية */
 }
 
 .hero-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* قص الصورة على شكل سداسي */
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  border-radius: 50%;
+  /* تأكد من أن الصورة لا تملك أي ظل خاص بها لتجنب التكرار */
+  box-shadow: none; 
 }
+
+/* ## إضافة: Keyframes للأنيميشن */
+@keyframes pulsating-glow {
+  0% {
+    box-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--accent-color);
+  }
+  100% {
+    box-shadow: 0 0 25px var(--accent-color), 0 0 50px var(--accent-color);
+  }
+}
+
+/* بقية ملف style.css يبقى كما هو */
 
 /* ==== SKILLS SECTION (تنسيق داكن) ==== */
 .skills {
